@@ -16,7 +16,7 @@ var WebpackJsObfuscator = require('webpack-js-obfuscator');
 // webpack plugins array
 plugins: [
 	new UglifyJsPlugin(), // better to use with UglifyJsPlugin
-	new WebpackJsObfuscator()
+	new WebpackJsObfuscator({}, ['bundle_name.js'])
 ],
 ```
 
