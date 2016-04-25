@@ -16,7 +16,7 @@ var WebpackJsObfuscator = require('webpack-js-obfuscator');
 // webpack plugins array
 plugins: [
 	new UglifyJsPlugin(), // better to use with UglifyJsPlugin
-	new WebpackJsObfuscator({}, ['bundle_name.js'])
+	new WebpackJsObfuscator({}, ['excluded_bundle_name.js'])
 ],
 ```
 
@@ -28,6 +28,6 @@ Options for [js-obfuscator](https://github.com/caiguanhao/js-obfuscator). Should
 ###excludes
 Type: `Array` or `String` Default: `[]`
 
-Examples: `["**/jquery-*.js", "**/*.min.js"]` or `"**/jquery-*.js"`
+Examples: `['excluded_bundle_name.js', '**_bundle_name.js']` or `'excluded_bundle_name.js'`
 
 Can be used to bypass obfuscation of some files.
