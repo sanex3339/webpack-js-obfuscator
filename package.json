@@ -1,7 +1,7 @@
 {
   "name": "webpack-js-obfuscator",
-  "version": "0.0.3",
-  "description": "JsObfuscator plugin for Webpack",
+  "version": "0.0.4",
+  "description": "JSObfuscator plugin for Webpack",
   "main": "index.js",
   "dependencies": {
     "gulp-util": "^3.0.5",

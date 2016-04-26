@@ -1,10 +1,10 @@
-#JS-Obfuscator plugin for Webpack
+#JSObfuscator plugin for Webpack
 
 ###Installation
 
 Install the package with NPM and add it to your devDependencies:
 
-`npm install --save-dev gulp-js-obfuscator`
+`npm install --save-dev webpack-js-obfuscator`
 
 ###Usage:
 
