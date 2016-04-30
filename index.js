@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments)).next());
     });
 };
-let RawSource = require('webpack-core/lib/RawSource'), jsObfuscator = require('js-obfuscator'), multimatch = require('multimatch'), gutil = require('gulp-util'), PluginError = gutil.PluginError;
+let RawSource = require('webpack-core/lib/RawSource'), jsObfuscator = require('js-obfuscator'), multimatch = require('multimatch'), gutil = require('gulp-util'), PluginError = gutil['PluginError'];
 class WebpackJsObfuscator {
     constructor(options, excludes) {
         this.options = {};
@@ -20,7 +20,7 @@ class WebpackJsObfuscator {
             compilation.plugin("optimize-chunk-assets", (chunks, callback) => __awaiter(this, void 0, void 0, function* () {
                 let files = [];
                 chunks.forEach((chunk) => {
-                    chunk.files.forEach((file) => {
+                    chunk['files'].forEach((file) => {
                         files.push(file);
                     });
                 });
@@ -28,7 +28,7 @@ class WebpackJsObfuscator {
                     files.push(file);
                 });
                 yield Promise.all(files.map((file) => __awaiter(this, void 0, void 0, function* () {
-                    if (this.shouldExclude(file, this.excludes)) {
+                    if (WebpackJsObfuscator.shouldExclude(file, this.excludes)) {
                         return;
                     }
                     let asset = compilation.assets[file];
@@ -47,7 +47,7 @@ class WebpackJsObfuscator {
             });
         });
     }
-    shouldExclude(filePath, excludes) {
+    static shouldExclude(filePath, excludes) {
         for (var i = 0; i < excludes.length; i++) {
             if (multimatch(filePath, excludes[i]).length > 0) {
                 return true;

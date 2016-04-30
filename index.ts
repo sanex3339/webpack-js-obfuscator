@@ -3,30 +3,30 @@
 declare let module: any;
 declare let require: any;
 
-let RawSource = require('webpack-core/lib/RawSource'),
-    jsObfuscator = require('js-obfuscator'),
-    multimatch = require('multimatch'),
-    gutil = require('gulp-util'),
-    PluginError = gutil.PluginError;
+let RawSource: any = require('webpack-core/lib/RawSource'),
+    jsObfuscator: any = require('js-obfuscator'),
+    multimatch: any = require('multimatch'),
+    gutil: any = require('gulp-util'),
+    PluginError: any = gutil['PluginError'];
 
 class WebpackJsObfuscator {
     public options: any = {};
-    public excludes: any;
+    public excludes: string[];
 
     private PLUGIN_NAME: string = 'webpack-js-obfuscator';
 
-    constructor (options, excludes) {
+    constructor (options: any, excludes: string|string[]) {
         this.options = options;
         this.excludes = typeof excludes === 'string' ? [excludes] : excludes || [];
     }
 
-    public apply (compiler) {
-        compiler.plugin('compilation', (compilation) => {
-            compilation.plugin("optimize-chunk-assets", async (chunks, callback) => {
+    public apply (compiler: any) {
+        compiler.plugin('compilation', (compilation: any) => {
+            compilation.plugin("optimize-chunk-assets", async (chunks: any[], callback: () => void) => {
                 let files = [];
 
                 chunks.forEach((chunk) => {
-                    chunk.files.forEach((file) => {
+                    chunk['files'].forEach((file) => {
                         files.push(file);
                     });
                 });
@@ -36,7 +36,7 @@ class WebpackJsObfuscator {
                 });
 
                 await Promise.all(files.map(async (file) => {
-                    if (this.shouldExclude(file, this.excludes)) {
+                    if (WebpackJsObfuscator.shouldExclude(file, this.excludes)) {
                         return;
                     }
 
@@ -50,7 +50,7 @@ class WebpackJsObfuscator {
         });
     }
 
-    private obfuscate (asset, options) {
+    private obfuscate (asset: any, options: any) {
         return new Promise((resolve, reject) => {
             jsObfuscator(asset.source(), options).then((result) => {
                 resolve(new RawSource(result));
@@ -60,7 +60,7 @@ class WebpackJsObfuscator {
         })
     }
 
-    private shouldExclude (filePath, excludes) {
+    private static shouldExclude (filePath: string, excludes: string[]) {
         for (var i = 0; i < excludes.length; i++) {
             if (multimatch(filePath, excludes[i]).length > 0) {
                 return true;
