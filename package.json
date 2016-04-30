@@ -1,6 +1,6 @@
 {
   "name": "webpack-js-obfuscator",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "JSObfuscator plugin for Webpack",
   "main": "index.js",
   "dependencies": {
